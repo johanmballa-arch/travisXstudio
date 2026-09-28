@@ -59,12 +59,12 @@ let sec=0;setInterval(()=>{sec++;const p=n=>String(n).padStart(2,'0');$('#tc').t
 const mob=matchMedia('(max-width:760px)'),vib=n=>navigator.vibrate&&navigator.vibrate(n);
 // Dock de navigation avec bouton Devis central
 const S=p=>`<svg viewBox="0 0 24 24" aria-hidden="true">${p}</svg>`;
-const items=[['#accueil','Accueil','<path d="M3 11l9-8 9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/>'],['#services','Services','<path d="M12 3l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/>'],['#portfolio','Réalisations','<rect x="3" y="4" width="18" height="16" rx="3"/><path d="M10 9l5 3-5 3z"/>'],['#apropos','À propos','<circle cx="12" cy="8" r="3.5"/><path d="M5 20c.5-4 2.8-6 7-6s6.5 2 7 6"/>'],['#partenaires','Partenaires','<path d="M8 12l2.5-2.5a3 3 0 0 1 4.2 0l1.3 1.3M16 12l-2.5 2.5a3 3 0 0 1-4.2 0L8 13.2"/><path d="M7 9l-2 2a3 3 0 0 0 0 4.2l2 2M17 15l2-2a3 3 0 0 0 0-4.2l-2-2"/>'],['#contact','Contact','<path d="M4 5h16v14H4z"/><path d="M4 7l8 6 8-6"/>']];
+const items=[['#services','Services','<path d="M12 3l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/>'],['#portfolio','Réalisations','<rect x="3" y="4" width="18" height="16" rx="3"/><path d="M10 9l5 3-5 3z"/>'],['#apropos','À propos','<circle cx="12" cy="8" r="3.5"/><path d="M5 20c.5-4 2.8-6 7-6s6.5 2 7 6"/>'],['#contact','Contact','<path d="M4 5h16v14H4z"/><path d="M4 7l8 6 8-6"/>']];
 const dock=document.createElement('nav');dock.className='dock glass';dock.setAttribute('aria-label','Navigation mobile');
-dock.innerHTML='<span class="pillbg"></span>'+items.map(([h,t,p])=>`<a href="${h}">${S(p)}<small>${t}</small></a>`).join('');
+dock.innerHTML='<span class="pillbg"></span>'+items.map(([h,t,p])=>`<a href="${h}">${S(p)}<small>${t}</small></a>`).join('')+`<a class="dock-quote" href="#contact">${S('<path d="M4 4h16v12H8l-4 4z"/><path d="M8 9h8M8 12h5"/>')}<small>Devis</small></a>`;
 document.body.append(dock);
-const dl=$$('a',dock),ds=dl.map(a=>$(a.getAttribute('href')));
-const upd=()=>{if(!mob.matches)return;let cur=dl[0],best=-1e9;
+const dl=$$('a:not(.dock-quote)',dock),ds=dl.map(a=>$(a.getAttribute('href')));
+const upd=()=>{if(!mob.matches)return;let cur=null,best=-1e9;
  dl.forEach((a,i)=>{const t=ds[i].getBoundingClientRect().top;if(t<innerHeight*.5&&t>best){best=t;cur=a}});
  dl.forEach(a=>a.classList.toggle('on',a===cur));pill(dock,cur);
  document.body.classList.toggle('past-hero',scrollY>innerHeight*.9)};
