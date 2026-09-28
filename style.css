@@ -278,3 +278,40 @@ footer{margin:24px 16px 16px;padding:24px;text-align:center;font-size:.9rem;colo
  .toasts .toast:not(:last-child){display:none}
  body.past-hero .toasts{display:none}
 }
+
+/* ===== STABILISATION : aucun débordement, rendu fluide ===== */
+html{overflow-x:clip;width:100%;-webkit-text-size-adjust:100%;text-size-adjust:100%;overscroll-behavior-y:none}
+body{overflow-x:clip;overflow-wrap:break-word;max-width:100%}
+a,button,input,label,select,textarea{touch-action:manipulation}
+.btn,.dock,.seg,.chip,.ib{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+.hero-grid>*,.services>*,.team>*,.stats>*{min-width:0}
+img,svg{max-width:100%}
+.card .info{background:rgba(5,6,8,.58)}
+.card .pl{background:rgba(5,6,8,.5)}
+@media (max-width:760px){
+ html{scroll-padding-bottom:110px}
+ body::before{top:0;left:0;width:100%;height:100lvh;height:100vh;inset:auto;transform:translateZ(0)}
+ .wrap{padding-left:max(20px,env(safe-area-inset-left));padding-right:max(20px,env(safe-area-inset-right))}
+ .hero{overflow:clip}
+ .hero-grid{grid-template-columns:minmax(0,1fr)}
+ .services,.stats{grid-template-columns:minmax(0,1fr)}
+ .stats{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+ /* Slogan : chaque ligne tient toujours dans la carte */
+ #h1{font-size:clamp(1.25rem,calc((100vw - 82px)/12),2.6rem)}
+ #h1 .ln{white-space:nowrap}
+ #h1 .l1{padding-left:1.9em}#h1 .l2{padding-left:.95em}
+ #sw{display:block;min-height:1.3em}
+ /* Verre allégé : un seul flou par bloc, jamais imbriqué */
+ .service,.member,.stat,.card .info,.card .pl,.ib,.chip span,.seg,.field input,.field textarea,.btn.ghost,.toast,.marquee,footer,.badge{-webkit-backdrop-filter:none;backdrop-filter:none;background:linear-gradient(135deg,rgba(255,255,255,.14),rgba(255,255,255,.06))}
+ .card .info{background:rgba(5,6,8,.6)}
+ .card .pl{background:rgba(5,6,8,.5)}
+ /* Animations coûteuses coupées */
+ .card,.card .pl{animation:none}
+ .chart .line{filter:none}
+ .orb{translate:none;transition:none}
+ .js .rv{filter:none;transform:translateY(16px);transition:opacity .5s,transform .5s var(--ease)}
+ .js .rv.in{transform:none}
+ /* Carrousels précis */
+ .grid,.team,.side{overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch}
+ .grid>.card,.team>.member,.side>.w-card{scroll-snap-stop:always}
+}

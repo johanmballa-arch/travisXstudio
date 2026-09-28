@@ -23,14 +23,14 @@ const onScroll=()=>{const h=document.documentElement,y=scrollY;
  $('#top').classList.toggle('show',y>600);
  let cur=null;secs.forEach((s,i)=>{if(s.getBoundingClientRect().top<innerHeight*.4)cur=nl[i]});
  nl.forEach(a=>a.classList.toggle('on',a===cur));pill(nav,cur)};
-addEventListener('scroll',onScroll,{passive:true});addEventListener('resize',onScroll);onScroll();
+let tk=0;addEventListener('scroll',()=>{if(tk)return;tk=1;requestAnimationFrame(()=>{tk=0;onScroll()})},{passive:true});addEventListener('resize',onScroll);onScroll();
 $('#top').onclick=()=>scrollTo({top:0});
 // Apparition + compteurs
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;e.target.classList.add('in');io.unobserve(e.target);
  $$('[data-n]',e.target).forEach(n=>{const t=+n.dataset.n,t0=performance.now();(function f(now){const p=Math.min((now-t0)/1400,1);n.textContent=Math.round(t*(1-Math.pow(1-p,3)));if(p<1)requestAnimationFrame(f)})(t0)})}),{threshold:.15});
 $$('.rv').forEach(el=>io.observe(el));
 // Halo, inclinaison 3D, aimant, ondulation
-document.addEventListener('pointermove',e=>{
+document.addEventListener('pointermove',e=>{if(e.pointerType==='touch')return;
  const g=e.target.closest('.glass,.card');
  if(g){const r=g.getBoundingClientRect();g.style.setProperty('--mx',e.clientX-r.left+'px');g.style.setProperty('--my',e.clientY-r.top+'px')}
  const t=e.target.closest('[data-tilt]');
@@ -44,7 +44,7 @@ document.addEventListener('pointermove',e=>{
 document.addEventListener('pointerdown',e=>{const b=e.target.closest('.btn');if(!b)return;const r=b.getBoundingClientRect(),s=document.createElement('span');s.className='rip';s.style.left=e.clientX-r.left+'px';s.style.top=e.clientY-r.top+'px';b.append(s);setTimeout(()=>s.remove(),650)});
 // Curseur lentille
 const lens=$('#lens');let lx=0,ly=0,tx=0,ty=0;
-document.addEventListener('pointermove',e=>{tx=e.clientX;ty=e.clientY;lens.style.opacity=1;lens.classList.toggle('big',!!e.target.closest('a,button,.chip,.card,input,textarea'))});
+document.addEventListener('pointermove',e=>{if(e.pointerType==='touch')return;tx=e.clientX;ty=e.clientY;lens.style.opacity=1;lens.classList.toggle('big',!!e.target.closest('a,button,.chip,.card,input,textarea'))});
 (function loop(){lx+=(tx-lx)*.18;ly+=(ty-ly)*.18;lens.style.transform=`translate(${lx}px,${ly}px)`;requestAnimationFrame(loop)})();
 // Budget + envoi animé
 const b=$('#b');b.oninput=()=>$('#bo').textContent=(+b.value).toLocaleString('fr-FR')+' FCFA';
@@ -77,7 +77,7 @@ const upd=()=>{if(!mob.matches)return;let cur=dl[0],best=-1e9;
  dl.forEach((a,i)=>{const t=ds[i].getBoundingClientRect().top;if(t<innerHeight*.5&&t>best){best=t;cur=a}});
  dl.forEach(a=>a.classList.toggle('on',a===cur));pill(dock,cur.classList.contains('cta-d')?null:cur);
  document.body.classList.toggle('past-hero',scrollY>innerHeight*.9)};
-addEventListener('scroll',upd,{passive:true});addEventListener('resize',upd);addEventListener('load',upd);upd();
+let tu=0;addEventListener('scroll',()=>{if(tu)return;tu=1;requestAnimationFrame(()=>{tu=0;upd()})},{passive:true});addEventListener('resize',upd);addEventListener('load',upd);upd();
 // Retour haptique + goutte de verre sous le doigt
 document.addEventListener('pointerdown',e=>{if(e.pointerType!=='touch')return;
  if(e.target.closest('.btn,.ib,.chip,.dock a,.seg button,.badge'))vib(10);
@@ -94,7 +94,7 @@ function carousel(el){const d=document.createElement('div');d.className='dots';e
   ks.forEach((k,i)=>{const dist=Math.abs(k.offsetLeft+k.offsetWidth/2-c),f=Math.min(dist/el.clientWidth,1);if(dist<bd){bd=dist;best=i}k.style.scale=(1-f*.12).toFixed(3);k.style.opacity=(1-f*.45).toFixed(2)});
   if(d.children.length!==ks.length)d.innerHTML=ks.map(()=>'<i></i>').join('');[...d.children].forEach((x,i)=>x.classList.toggle('on',i===best));
   if(best!==last){if(last>-1)vib(6);last=best}};
- el.addEventListener('scroll',u,{passive:true});addEventListener('resize',u);u();return u}
+ let t=0;el.addEventListener('scroll',()=>{if(t)return;t=1;requestAnimationFrame(()=>{t=0;u()})},{passive:true});addEventListener('resize',u);u();return u}
 if(mob.matches){
  const gu=carousel($('.grid'));carousel($('.team'));carousel($('.side'));
  $$('#seg button').forEach(b=>b.addEventListener('click',()=>setTimeout(()=>{$('.grid').scrollTo({left:0});gu()},60)));
