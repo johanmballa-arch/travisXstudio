@@ -54,7 +54,7 @@ $('#form').addEventListener('submit',e=>{e.preventDefault();const s=$('#send'),t
 
 // Accueil : chronomètre REC et mot qui change
 let sec=0;setInterval(()=>{sec++;const p=n=>String(n).padStart(2,'0');$('#tc').textContent=`REC ${p(Math.floor(sec/3600))}:${p(Math.floor(sec/60)%60)}:${p(sec%60)}`},1000);
-const words=['des clips musicaux','des spots publicitaires','des affiches percutantes','du contenu qui performe','vos campagnes digitales'];let wi=0;
+const words=['des clips musicaux','des spots publicitaires','des affiches percutantes','du contenu qui performe','votre site web sur mesure','vos campagnes digitales'];let wi=0;
 setInterval(()=>{const s=$('#sw');s.classList.add('out');setTimeout(()=>{wi=(wi+1)%words.length;s.textContent=words[wi];s.classList.remove('out')},400)},2600);
 
 // Widgets marketing digital : portée et j'aimes en direct, notifications
@@ -100,3 +100,6 @@ if(mob.matches){
  $$('#seg button').forEach(b=>b.addEventListener('click',()=>setTimeout(()=>{$('.grid').scrollTo({left:0});gu()},60)));
 }
 })();
+
+// Partenaires : deux bandes qui défilent en sens inverse
+$$('.ptrack').forEach(t=>{const h=t.innerHTML;t.innerHTML=h+h;const n=t.children.length/2;[...t.children].slice(n).forEach(c=>c.setAttribute('aria-hidden','true'))});
