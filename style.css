@@ -205,3 +205,76 @@ footer{margin:24px 16px 16px;padding:24px;text-align:center;font-size:.9rem;colo
 @keyframes toast{0%{opacity:0;transform:translateY(20px) scale(.8)}10%,80%{opacity:1;transform:none}100%{opacity:0;transform:translateY(-16px)}}
 @media (max-width:900px){.hero-grid{grid-template-columns:1fr}.side{grid-template-columns:1fr 1fr}.side .badge{display:none}}
 @media (max-width:560px){.side{grid-template-columns:1fr}.toasts{right:auto;left:0}}
+
+/* ===== MOBILE : expérience tactile type application ===== */
+*{-webkit-tap-highlight-color:transparent}
+.dock,.dots{display:none}
+.drop{position:fixed;width:12px;height:12px;margin:-6px;border-radius:50%;border:2px solid var(--sky);box-shadow:0 0 14px var(--sky);pointer-events:none;z-index:98;animation:drop .7s ease-out forwards}
+@keyframes drop{to{transform:scale(9);opacity:0}}
+@media (pointer:coarse){
+ [data-mag],[data-tilt]{transform:none!important}
+ .glass::after,.glass:hover::after{opacity:.5}
+}
+@media (max-width:760px){
+ body{font-size:15px}
+ .wrap{padding:0 20px}
+ section,.hero{scroll-margin-top:70px}
+ section{padding:44px 0}
+ section h2{font-size:clamp(1.7rem,7vw,2.2rem)}
+ .lead{margin-bottom:24px;font-size:.95rem}
+ .glass,.ib,.chip span,.seg,.field input,.field textarea,.btn.ghost{-webkit-backdrop-filter:blur(12px) saturate(160%);backdrop-filter:blur(12px) saturate(160%)}
+ /* Barre du haut : logo seul, la navigation passe en bas */
+ header{padding:max(10px,env(safe-area-inset-top)) 14px 6px}
+ .nav{justify-content:center;padding:8px 16px}
+ .nav nav{display:none}
+ /* Dock flottant avec bouton Devis central */
+ .dock{display:flex;position:fixed;left:12px;right:12px;bottom:calc(10px + env(safe-area-inset-bottom));z-index:60;padding:8px;border-radius:32px;align-items:center;transition:transform .5s var(--ease)}
+ body:has(input:focus,textarea:focus) .dock{transform:translateY(160%)}
+ .dock a{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:2px;flex:1;padding:8px 0;border-radius:24px;text-decoration:none;color:var(--muted);font-size:.68rem;transition:color .3s}
+ .dock a.on{color:#000}
+ .dock svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transition:transform .4s var(--ease)}
+ .dock a.on svg{transform:translateY(-2px) scale(1.12)}
+ .dock .cta-d{flex:0 0 58px;height:58px;margin-top:-32px;justify-content:center;border-radius:50%;background:var(--sky);color:#000;box-shadow:0 0 0 6px #050608,0 10px 30px rgba(91,192,248,.55);animation:beat 2.4s infinite}
+ .dock .cta-d svg{width:26px;height:26px}
+ @keyframes beat{50%{transform:scale(1.08)}}
+ .top{display:none}
+ footer{padding-bottom:110px}
+ /* Accueil */
+ .hero{padding:20px 0 40px}
+ #h1{font-size:clamp(1.9rem,9.5vw,2.7rem)}
+ .hero .cta{display:grid;grid-template-columns:1fr}
+ .hero .cta .btn{justify-content:space-between;min-height:52px}
+ .side{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;margin:0 -20px;padding:6px 20px 12px;scrollbar-width:none;position:relative}
+ .side::-webkit-scrollbar,.grid::-webkit-scrollbar,.team::-webkit-scrollbar,.chips::-webkit-scrollbar,.seg::-webkit-scrollbar{display:none}
+ .side .w-card{flex:0 0 78%;scroll-snap-align:center}
+ .orb{opacity:.6}
+ .marquee{margin:0 12px}
+ .track{font-size:1.1rem;gap:24px}
+ /* Carrousels à glisser avec points */
+ .grid,.team{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:14px;margin:0 -20px;padding:6px 20px 16px;scrollbar-width:none;position:relative}
+ .grid>.card{flex:0 0 78%;scroll-snap-align:center}
+ .team>.member{flex:0 0 72%;scroll-snap-align:center}
+ .dots{display:flex;justify-content:center;gap:6px;margin-top:2px}
+ .dots i{width:6px;height:6px;border-radius:9px;background:rgba(255,255,255,.3);transition:all .4s var(--ease)}
+ .dots i.on{width:22px;background:var(--sky);box-shadow:0 0 10px var(--sky)}
+ .seg{max-width:100%;overflow-x:auto}
+ .seg button{padding:8px 13px}
+ .services{grid-template-columns:1fr}
+ .service{padding:20px}
+ .stats{display:grid;grid-template-columns:1fr 1fr}
+ .stat{min-width:0;padding:18px}
+ .stat:last-child{grid-column:span 2}
+ .ib{width:44px;height:44px}
+ .soc{opacity:1;transform:none}
+ /* Formulaire confortable au pouce */
+ .form-box{padding:22px}
+ .field input,.field textarea{font-size:16px}
+ .chips{flex-wrap:nowrap;overflow-x:auto;margin:0 -6px;padding:4px 6px;scrollbar-width:none}
+ .chip{flex:none}.chip span{white-space:nowrap;padding:11px 18px}
+ input[type=range]{height:44px}
+ #send{width:100%;min-height:54px}
+ /* Notifications en bannière, visibles seulement dans l'accueil */
+ .toasts{position:fixed;top:74px;left:0;right:0;bottom:auto;align-items:center}
+ .toasts .toast:not(:last-child){display:none}
+ body.past-hero .toasts{display:none}
+}

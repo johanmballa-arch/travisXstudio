@@ -62,3 +62,41 @@ const fmt=n=>n.toLocaleString('fr-FR');let reach=128400,likes=2840;
 setInterval(()=>{reach+=10+Math.floor(Math.random()*90);if(Math.random()<.6)likes++;$('#reach').textContent=fmt(reach);$('#likes').textContent=fmt(likes)},900);
 const notes=["♥ Nouveau j'aime","+1 abonné","▶ 1,2K vues","Nouveau commentaire","Partagé 24 fois"];let ni=0;const T=$('.toasts');
 setInterval(()=>{const d=document.createElement('div');d.className='toast glass';d.textContent=notes[ni++%notes.length];T.append(d);if(T.children.length>3)T.firstChild.remove();setTimeout(()=>d.remove(),3700)},1800);
+
+// ===== MOBILE =====
+(()=>{
+const mob=matchMedia('(max-width:760px)'),vib=n=>navigator.vibrate&&navigator.vibrate(n);
+// Dock de navigation avec bouton Devis central
+const S=p=>`<svg viewBox="0 0 24 24" aria-hidden="true">${p}</svg>`;
+const items=[['#accueil','Accueil','<path d="M3 11l9-8 9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/>'],['#services','Services','<path d="M12 3l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/>'],['#contact','Devis','<path d="M12 5v14M5 12h14"/>','cta-d'],['#portfolio','Projets','<rect x="3" y="4" width="18" height="16" rx="3"/><path d="M10 9l5 3-5 3z"/>'],['#equipe','Équipe','<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c0-4 3-6 6.5-6s6.5 2 6.5 6"/><circle cx="17.5" cy="9" r="2.5"/>']];
+const dock=document.createElement('nav');dock.className='dock glass';dock.setAttribute('aria-label','Navigation mobile');
+dock.innerHTML='<span class="pillbg"></span>'+items.map(([h,t,p,c])=>`<a href="${h}" class="${c||''}"${c?' aria-label="Demander un devis"':''}>${S(p)}${c?'':`<small>${t}</small>`}</a>`).join('');
+document.body.append(dock);
+const dl=$$('a',dock),ds=dl.map(a=>$(a.getAttribute('href')));
+const upd=()=>{if(!mob.matches)return;let cur=dl[0],best=-1e9;
+ dl.forEach((a,i)=>{const t=ds[i].getBoundingClientRect().top;if(t<innerHeight*.5&&t>best){best=t;cur=a}});
+ dl.forEach(a=>a.classList.toggle('on',a===cur));pill(dock,cur.classList.contains('cta-d')?null:cur);
+ document.body.classList.toggle('past-hero',scrollY>innerHeight*.9)};
+addEventListener('scroll',upd,{passive:true});addEventListener('resize',upd);addEventListener('load',upd);upd();
+// Retour haptique + goutte de verre sous le doigt
+document.addEventListener('pointerdown',e=>{if(e.pointerType!=='touch')return;
+ if(e.target.closest('.btn,.ib,.chip,.dock a,.seg button,.badge'))vib(10);
+ const d=document.createElement('i');d.className='drop';d.style.left=e.clientX+'px';d.style.top=e.clientY+'px';document.body.append(d);setTimeout(()=>d.remove(),700)},{passive:true});
+// Reflets du verre pilotés par l'inclinaison du téléphone
+const tilt=e=>{const x=Math.max(-30,Math.min(30,e.gamma||0)),y=Math.max(-30,Math.min(30,(e.beta||0)-40));
+ document.documentElement.style.setProperty('--mx',(50+x*1.6)+'%');document.documentElement.style.setProperty('--my',(50+y*1.6)+'%');
+ $('.hero').style.setProperty('--px',(x/60).toFixed(2));$('.hero').style.setProperty('--py',(y/60).toFixed(2))};
+if(matchMedia('(pointer:coarse)').matches)addEventListener('click',()=>{const go=()=>addEventListener('deviceorientation',tilt);
+ if(window.DeviceOrientationEvent&&DeviceOrientationEvent.requestPermission)DeviceOrientationEvent.requestPermission().then(r=>r==='granted'&&go()).catch(()=>{});else go()},{once:true});
+// Carrousels : le plus proche du centre est mis en avant, points de repère
+function carousel(el){const d=document.createElement('div');d.className='dots';el.after(d);let last=-1;
+ const u=()=>{const ks=[...el.children].filter(k=>k.offsetParent),c=el.scrollLeft+el.clientWidth/2;let best=0,bd=1e9;
+  ks.forEach((k,i)=>{const dist=Math.abs(k.offsetLeft+k.offsetWidth/2-c),f=Math.min(dist/el.clientWidth,1);if(dist<bd){bd=dist;best=i}k.style.scale=(1-f*.12).toFixed(3);k.style.opacity=(1-f*.45).toFixed(2)});
+  if(d.children.length!==ks.length)d.innerHTML=ks.map(()=>'<i></i>').join('');[...d.children].forEach((x,i)=>x.classList.toggle('on',i===best));
+  if(best!==last){if(last>-1)vib(6);last=best}};
+ el.addEventListener('scroll',u,{passive:true});addEventListener('resize',u);u();return u}
+if(mob.matches){
+ const gu=carousel($('.grid'));carousel($('.team'));carousel($('.side'));
+ $$('#seg button').forEach(b=>b.addEventListener('click',()=>setTimeout(()=>{$('.grid').scrollTo({left:0});gu()},60)));
+}
+})();
