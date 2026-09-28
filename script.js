@@ -26,8 +26,7 @@ const onScroll=()=>{const h=document.documentElement,y=scrollY;
 let tk=0;addEventListener('scroll',()=>{if(tk)return;tk=1;requestAnimationFrame(()=>{tk=0;onScroll()})},{passive:true});addEventListener('resize',onScroll);onScroll();
 $('#top').onclick=()=>scrollTo({top:0});
 // Apparition + compteurs
-const io=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;e.target.classList.add('in');io.unobserve(e.target);
- $$('[data-n]',e.target).forEach(n=>{const t=+n.dataset.n,t0=performance.now();(function f(now){const p=Math.min((now-t0)/1400,1);n.textContent=Math.round(t*(1-Math.pow(1-p,3)));if(p<1)requestAnimationFrame(f)})(t0)})}),{threshold:.15});
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;e.target.classList.add('in');io.unobserve(e.target)}),{threshold:.15});
 $$('.rv').forEach(el=>io.observe(el));
 // Halo, inclinaison 3D, aimant, ondulation
 document.addEventListener('pointermove',e=>{if(e.pointerType==='touch')return;
@@ -52,30 +51,22 @@ $('#form').addEventListener('submit',e=>{e.preventDefault();const s=$('#send'),t
  setTimeout(()=>{s.classList.replace('load','done');t.textContent='Message envoyé ✓';e.target.reset();b.oninput();
  setTimeout(()=>{s.classList.remove('done');t.textContent='Envoyer le message'},3000)},1500)});
 
-// Accueil : chronomètre REC et mot qui change
+// Chronomètre REC
 let sec=0;setInterval(()=>{sec++;const p=n=>String(n).padStart(2,'0');$('#tc').textContent=`REC ${p(Math.floor(sec/3600))}:${p(Math.floor(sec/60)%60)}:${p(sec%60)}`},1000);
-const words=['des clips musicaux','des spots publicitaires','des affiches percutantes','du contenu qui performe','votre site web sur mesure','vos campagnes digitales'];let wi=0;
-setInterval(()=>{const s=$('#sw');s.classList.add('out');setTimeout(()=>{wi=(wi+1)%words.length;s.textContent=words[wi];s.classList.remove('out')},400)},2600);
-
-// Widgets marketing digital : portée et j'aimes en direct, notifications
-const fmt=n=>n.toLocaleString('fr-FR');let reach=128400,likes=2840;
-setInterval(()=>{reach+=10+Math.floor(Math.random()*90);if(Math.random()<.6)likes++;$('#reach').textContent=fmt(reach);$('#likes').textContent=fmt(likes)},900);
-const notes=["♥ Nouveau j'aime","+1 abonné","▶ 1,2K vues","Nouveau commentaire","Partagé 24 fois"];let ni=0;const T=$('.toasts');
-setInterval(()=>{const d=document.createElement('div');d.className='toast glass';d.textContent=notes[ni++%notes.length];T.append(d);if(T.children.length>3)T.firstChild.remove();setTimeout(()=>d.remove(),3700)},1800);
 
 // ===== MOBILE =====
 (()=>{
 const mob=matchMedia('(max-width:760px)'),vib=n=>navigator.vibrate&&navigator.vibrate(n);
 // Dock de navigation avec bouton Devis central
 const S=p=>`<svg viewBox="0 0 24 24" aria-hidden="true">${p}</svg>`;
-const items=[['#accueil','Accueil','<path d="M3 11l9-8 9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/>'],['#services','Services','<path d="M12 3l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/>'],['#contact','Devis','<path d="M12 5v14M5 12h14"/>','cta-d'],['#portfolio','Projets','<rect x="3" y="4" width="18" height="16" rx="3"/><path d="M10 9l5 3-5 3z"/>'],['#equipe','Équipe','<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c0-4 3-6 6.5-6s6.5 2 6.5 6"/><circle cx="17.5" cy="9" r="2.5"/>']];
+const items=[['#accueil','Accueil','<path d="M3 11l9-8 9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/>'],['#services','Services','<path d="M12 3l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/>'],['#portfolio','Réalisations','<rect x="3" y="4" width="18" height="16" rx="3"/><path d="M10 9l5 3-5 3z"/>'],['#apropos','À propos','<circle cx="12" cy="8" r="3.5"/><path d="M5 20c.5-4 2.8-6 7-6s6.5 2 7 6"/>'],['#partenaires','Partenaires','<path d="M8 12l2.5-2.5a3 3 0 0 1 4.2 0l1.3 1.3M16 12l-2.5 2.5a3 3 0 0 1-4.2 0L8 13.2"/><path d="M7 9l-2 2a3 3 0 0 0 0 4.2l2 2M17 15l2-2a3 3 0 0 0 0-4.2l-2-2"/>'],['#contact','Contact','<path d="M4 5h16v14H4z"/><path d="M4 7l8 6 8-6"/>']];
 const dock=document.createElement('nav');dock.className='dock glass';dock.setAttribute('aria-label','Navigation mobile');
-dock.innerHTML='<span class="pillbg"></span>'+items.map(([h,t,p,c])=>`<a href="${h}" class="${c||''}"${c?' aria-label="Demander un devis"':''}>${S(p)}${c?'':`<small>${t}</small>`}</a>`).join('');
+dock.innerHTML='<span class="pillbg"></span>'+items.map(([h,t,p])=>`<a href="${h}">${S(p)}<small>${t}</small></a>`).join('');
 document.body.append(dock);
 const dl=$$('a',dock),ds=dl.map(a=>$(a.getAttribute('href')));
 const upd=()=>{if(!mob.matches)return;let cur=dl[0],best=-1e9;
  dl.forEach((a,i)=>{const t=ds[i].getBoundingClientRect().top;if(t<innerHeight*.5&&t>best){best=t;cur=a}});
- dl.forEach(a=>a.classList.toggle('on',a===cur));pill(dock,cur.classList.contains('cta-d')?null:cur);
+ dl.forEach(a=>a.classList.toggle('on',a===cur));pill(dock,cur);
  document.body.classList.toggle('past-hero',scrollY>innerHeight*.9)};
 let tu=0;addEventListener('scroll',()=>{if(tu)return;tu=1;requestAnimationFrame(()=>{tu=0;upd()})},{passive:true});addEventListener('resize',upd);addEventListener('load',upd);upd();
 // Retour haptique + goutte de verre sous le doigt
