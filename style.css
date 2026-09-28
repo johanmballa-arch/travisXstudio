@@ -315,3 +315,28 @@ img,svg{max-width:100%}
  .grid,.team,.side{overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch}
  .grid>.card,.team>.member,.side>.w-card{scroll-snap-stop:always}
 }
+
+/* ===== CORRECTIFS D'APRÈS CAPTURES MOBILE ===== */
+/* Le fieldset s'élargissait pour contenir les puces : tout le formulaire débordait */
+fieldset{min-width:0;min-inline-size:0;width:100%}
+form{grid-template-columns:minmax(0,1fr)}
+.field,.range,.chips,#send{min-width:0;max-width:100%}
+input[type=range]{max-width:100%}
+/* Sur écran tactile, aucun effet de survol ne reste bloqué après un toucher */
+@media (hover:none){
+ .btn:hover::before{width:0;height:0}
+ .btn:hover::after{left:-60%}
+ .btn:hover .ar{transform:none}
+ .btn.ghost:hover{color:#fff}
+ .ib:hover{background:linear-gradient(135deg,rgba(255,255,255,.14),rgba(255,255,255,.06));color:var(--fg);transform:none}
+ .service:hover .ico{transform:none;border-radius:50%}
+ .stat:hover{transform:none}
+ .member:hover .avatar{transform:none;border-radius:50%}
+ .card:hover .pl{transform:none}
+ .card:hover::before{opacity:.5}
+}
+/* Le pied de page passe entièrement au-dessus du dock quand on arrive en bas */
+@media (max-width:760px){
+ body{padding-bottom:calc(112px + env(safe-area-inset-bottom))}
+ footer{padding-bottom:24px}
+}
