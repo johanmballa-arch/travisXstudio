@@ -56,6 +56,26 @@ document.addEventListener('pointermove',e=>{if(e.pointerType==='touch')return;
  $('.hero').style.setProperty('--px',(e.clientX/innerWidth-.5).toFixed(2));$('.hero').style.setProperty('--py',(e.clientY/innerHeight-.5).toFixed(2));
 });
 document.addEventListener('pointerdown',e=>{const b=e.target.closest('.btn');if(!b)return;const r=b.getBoundingClientRect(),s=document.createElement('span');s.className='rip';s.style.left=e.clientX-r.left+'px';s.style.top=e.clientY-r.top+'px';b.append(s);setTimeout(()=>s.remove(),650)});
+// Curseur de réalisation et éclats lumineux au clic.
+const cursor=$('#cursor');
+if(matchMedia('(hover: hover) and (pointer: fine)').matches){
+ document.addEventListener('pointermove',e=>{
+    cursor.classList.add('visible');
+  cursor.style.transform=`translate3d(${e.clientX}px,${e.clientY}px,0)`;
+  cursor.classList.toggle('is-play',!!e.target.closest('.card[data-kind="video"],.badge'));
+  cursor.classList.toggle('is-zoom',!!e.target.closest('.card[data-kind="poster"],.media-dialog'));
+  cursor.classList.toggle('is-link',!!e.target.closest('a,button,input,textarea'));
+ });
+ document.addEventListener('pointerout',e=>{if(!e.relatedTarget)cursor.classList.remove('visible')});
+ document.addEventListener('pointerdown',e=>{
+  const button=e.target.closest('.btn');if(!button)return;
+  for(let i=0;i<8;i++){
+   const spark=document.createElement('i'),angle=(Math.PI*2*i)/8,distance=24+Math.random()*24;
+    spark.className='spark';spark.style.setProperty('--dx',`${Math.cos(angle)*distance}px`);spark.style.setProperty('--dy',`${Math.sin(angle)*distance}px`);
+    const bounds=button.getBoundingClientRect();spark.style.left=`${e.clientX-bounds.left}px`;spark.style.top=`${e.clientY-bounds.top}px`;button.append(spark);setTimeout(()=>spark.remove(),650);
+  }
+ });
+}
 // Budget et état honnête du formulaire tant qu'aucun service d'envoi n'est configuré.
 const b=$('#b'),budgetOutput=$('#bo');
 const updateBudget=()=>{const value=(+b.value).toLocaleString('fr-FR')+' FCFA';budgetOutput.textContent=value;b.setAttribute('aria-valuetext',value)};
