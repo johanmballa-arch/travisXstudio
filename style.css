@@ -303,6 +303,52 @@ a,button,input,label,select,textarea{touch-action:manipulation}
 img,svg{max-width:100%}
 .card .info{background:rgba(5,6,8,.58)}
 .card .pl{background:rgba(5,6,8,.5)}
+
+/* Réalisations : médias homogènes, verre cohérent et commandes lisibles */
+.nav nav{margin-inline:auto}
+.nav nav a.on,.seg button[aria-pressed="true"]{color:#031326}
+.nav-cta{color:#031326}
+.grid{grid-template-columns:repeat(3,minmax(0,1fr));align-items:stretch}
+.card{width:100%;border:1px solid rgba(255,255,255,.18);padding:12px;background:rgba(255,255,255,.07);text-align:left;color:var(--fg);font:inherit;cursor:pointer}
+.card .poster,.card .preview{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;aspect-ratio:4/5}
+.card .preview{z-index:1}
+.card .poster{z-index:0}
+.card::before{z-index:2;inset:0;background:linear-gradient(180deg,rgba(4,10,18,.02) 30%,rgba(4,10,18,.68) 100%);opacity:1}
+.card:hover::before{opacity:1}
+.card .pl{z-index:3;top:42%;display:none}
+.card[data-kind="video"] .pl{display:grid}
+.card .info{z-index:3;width:100%;min-height:82px;border-radius:18px;padding:12px 14px;display:flex;justify-content:space-between;align-items:center;gap:10px;background:linear-gradient(135deg,rgba(6,17,29,.82),rgba(6,17,29,.64));-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.2)}
+.caption{display:grid;gap:3px;min-width:0}
+.caption strong{font:700 1.08rem/1.15 'Bricolage Grotesque',sans-serif}
+.caption small{font-size:.8rem;color:rgba(255,255,255,.78)}
+.tag{width:max-content;padding:3px 8px;border-radius:999px;background:rgba(91,192,248,.2);color:#c1eaff;font-size:.68rem;line-height:1.2;font-weight:700}
+.card .ib{flex:none;background:rgba(255,255,255,.14)}
+.card:focus-visible{outline:3px solid #b5e5ff;outline-offset:4px}
+.portfolio-cta{display:flex;justify-content:center;flex-wrap:wrap;gap:12px;margin-top:28px}
+.media-dialog{position:fixed;inset:0;margin:auto;padding:24px;width:min(900px,calc(100vw - 32px));max-height:calc(100dvh - 32px);border:1px solid rgba(255,255,255,.24);border-radius:20px;background:rgba(4,10,19,.97);color:#fff;box-shadow:0 24px 90px rgba(0,0,0,.65)}
+.media-dialog::backdrop{background:rgba(0,0,0,.78);backdrop-filter:blur(8px)}
+.dialog-close{position:absolute;z-index:2;top:12px;right:12px;background:rgba(5,12,22,.78);cursor:pointer;font-size:1.4rem}
+.dialog-poster,.dialog-video{display:block;width:100%;max-height:min(68dvh,720px);object-fit:contain;border-radius:12px;background:#080d14}
+.dialog-caption{display:flex;align-items:center;gap:12px;padding:18px 4px 2px}
+.dialog-caption h2{font-size:1.35rem;margin:0}
+.dialog-caption p{color:var(--muted);margin-left:auto}
+.dialog-caption .tag{flex:none}
+@media(max-width:900px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:760px){
+ #portfolio{padding-top:60px}
+ #portfolio .wrap{scroll-margin-top:84px}
+ .grid{grid-template-columns:none}
+ .grid>.card{aspect-ratio:4/5;flex:0 0 min(76vw,340px);padding:10px}
+ .dock .pillbg{background:rgba(91,192,248,.16);border:1px solid rgba(91,192,248,.28);box-shadow:none}
+ .dock a.on{color:#75ceff}
+ .dock .dock-quote{background:var(--sky);color:#031326}
+ .portfolio-cta{display:grid;grid-template-columns:1fr}
+ .portfolio-cta .btn{justify-content:space-between;min-height:52px}
+ .media-dialog{padding:14px;border-radius:14px}
+ .dialog-caption{align-items:flex-start;flex-wrap:wrap;gap:8px}
+ .dialog-caption p{width:100%;margin:0}
+}
+@media(min-width:761px){.top{right:24px}}
 @media (max-width:760px){
  html{scroll-padding-bottom:110px}
  body::before{top:0;left:0;width:100%;height:100lvh;height:100vh;inset:auto;transform:translateZ(0)}

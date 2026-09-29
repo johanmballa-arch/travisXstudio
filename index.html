@@ -16,7 +16,7 @@
 
 <header>
   <div class="nav glass">
-    <a class="logo" href="#accueil"><span>TRAVIS X STUDIO</span></a>
+    <a class="logo" href="#accueil" aria-label="TRAVIS X STUDIO, accueil"><span>TRAVIS X STUDIO</span></a>
     <nav aria-label="Navigation principale" id="nav"><span class="pillbg"></span>
       <a href="#services">Services</a><a href="#portfolio">Réalisations</a><a href="#apropos">À propos</a><a href="#equipe">Équipe</a><a href="#partenaires">Partenaires</a><a href="#contact">Contact</a>
     </nav>
@@ -86,18 +86,19 @@
 <section id="portfolio">
   <div class="wrap rv">
     <h2>Nos réalisations</h2>
-    <p class="lead">Une sélection de projets récents. Remplacez ces cartes par vos vrais visuels et vidéos.</p>
+    <p class="lead">Clips, spots et affiches réalisés pour nos clients.</p>
     <div class="seg glass" id="seg" role="group" aria-label="Filtrer les réalisations"><span class="pillbg"></span>
       <button aria-pressed="true" data-f="all">Tout</button><button aria-pressed="false" data-f="clip">Clips</button><button aria-pressed="false" data-f="spot">Spots</button><button aria-pressed="false" data-f="affiche">Affiches</button>
     </div>
     <div class="grid">
-      <article class="card clip" data-tilt><span class="pl glass"></span><div class="info glass"><div><h3>Clip « Nom du projet »</h3><small>Clip musical</small></div><a class="ib" href="#contact" aria-label="Voir le projet">↗</a></div></article>
-      <article class="card spot" data-tilt><span class="pl glass"></span><div class="info glass"><div><h3>Spot Marque A</h3><small>Spot publicitaire</small></div><a class="ib" href="#contact" aria-label="Voir le projet">↗</a></div></article>
-      <article class="card affiche" data-tilt><span class="pl glass"></span><div class="info glass"><div><h3>Festival 2026</h3><small>Affiche</small></div><a class="ib" href="#contact" aria-label="Voir le projet">↗</a></div></article>
-      <article class="card clip" data-tilt><span class="pl glass"></span><div class="info glass"><div><h3>Clip institutionnel</h3><small>Clip vidéo</small></div><a class="ib" href="#contact" aria-label="Voir le projet">↗</a></div></article>
-      <article class="card affiche" data-tilt><span class="pl glass"></span><div class="info glass"><div><h3>Campagne lancement</h3><small>Affiche</small></div><a class="ib" href="#contact" aria-label="Voir le projet">↗</a></div></article>
-      <article class="card spot" data-tilt><span class="pl glass"></span><div class="info glass"><div><h3>Spot Marque B</h3><small>Spot publicitaire</small></div><a class="ib" href="#contact" aria-label="Voir le projet">↗</a></div></article>
+      <button class="card clip" type="button" data-kind="video" data-video="" data-tilt aria-label="Ouvrir l'aperçu du clip musical"><img class="poster" src="assets/portfolio/clip-musical.svg" alt="Illustration de clip musical, silhouette sur fond de scène"><video class="preview" muted loop playsinline preload="none" aria-hidden="true"></video><span class="pl glass" aria-hidden="true"></span><span class="info glass"><span class="caption"><span class="tag">Clip</span><strong>Rythmes en mouvement</strong><small>Projet musical</small></span><span class="ib" aria-hidden="true">↗</span></span></button>
+      <button class="card spot" type="button" data-kind="video" data-video="" data-tilt aria-label="Ouvrir l'aperçu du spot produit"><img class="poster" src="assets/portfolio/spot-produit.svg" alt="Illustration d'un flacon de soin dans un décor végétal"><video class="preview" muted loop playsinline preload="none" aria-hidden="true"></video><span class="pl glass" aria-hidden="true"></span><span class="info glass"><span class="caption"><span class="tag">Spot</span><strong>L'essentiel au naturel</strong><small>Film produit</small></span><span class="ib" aria-hidden="true">↗</span></span></button>
+      <button class="card affiche" type="button" data-kind="poster" data-tilt aria-label="Agrandir l'affiche du Festival des arts"><img class="poster" src="assets/portfolio/affiche-festival.svg" alt="Affiche graphique rouge et jaune pour un festival des arts"><span class="info glass"><span class="caption"><span class="tag">Affiche</span><strong>Festival des arts</strong><small>Événement culturel</small></span><span class="ib" aria-hidden="true">↗</span></span></button>
+      <button class="card clip" type="button" data-kind="video" data-video="" data-tilt aria-label="Ouvrir l'aperçu du film institutionnel"><img class="poster" src="assets/portfolio/film-institutionnel.svg" alt="Illustration architecturale d'un bâtiment au soleil"><video class="preview" muted loop playsinline preload="none" aria-hidden="true"></video><span class="pl glass" aria-hidden="true"></span><span class="info glass"><span class="caption"><span class="tag">Clip</span><strong>Les métiers en lumière</strong><small>Film institutionnel</small></span><span class="ib" aria-hidden="true">↗</span></span></button>
+      <button class="card affiche" type="button" data-kind="poster" data-tilt aria-label="Agrandir l'affiche de la campagne de lancement"><img class="poster" src="assets/portfolio/affiche-lancement.svg" alt="Affiche graphique aux formes lumineuses pour un lancement"><span class="info glass"><span class="caption"><span class="tag">Affiche</span><strong>Nouvelle énergie</strong><small>Campagne de lancement</small></span><span class="ib" aria-hidden="true">↗</span></span></button>
+      <button class="card spot" type="button" data-kind="video" data-video="" data-tilt aria-label="Ouvrir l'aperçu du film de marque"><img class="poster" src="assets/portfolio/spot-marque.svg" alt="Illustration d'un portrait en lumière chaude"><video class="preview" muted loop playsinline preload="none" aria-hidden="true"></video><span class="pl glass" aria-hidden="true"></span><span class="info glass"><span class="caption"><span class="tag">Spot</span><strong>Une histoire à raconter</strong><small>Film de marque</small></span><span class="ib" aria-hidden="true">↗</span></span></button>
     </div>
+    <div class="portfolio-cta"><a class="btn" href="#contact">Voir tous nos projets <i class="ar" aria-hidden="true">↗</i></a><a class="btn ghost" href="#contact">Demander un devis <i class="ar" aria-hidden="true">↗</i></a></div>
   </div>
 </section>
 
@@ -172,6 +173,13 @@
   <span>© <span id="y"></span> TRAVIS X STUDIO. Tous droits réservés.</span>
 </footer>
 <button class="top ib" id="top" aria-label="Retour en haut"><span>↑</span></button>
+
+<dialog class="media-dialog" id="media-dialog" aria-label="Aperçu de la réalisation">
+  <button class="dialog-close ib" type="button" aria-label="Fermer l'aperçu">×</button>
+  <img class="dialog-poster" alt="">
+  <video class="dialog-video" controls playsinline preload="none" hidden></video>
+  <div class="dialog-caption"><span class="tag"></span><h2></h2><p></p></div>
+</dialog>
 
 <script src="script.js"></script>
 </body>

@@ -16,6 +16,26 @@ const seg=$('#seg'),fb=$$('button',seg);
 fb.forEach(b=>b.onclick=()=>{fb.forEach(x=>x.setAttribute('aria-pressed',x===b));pill(seg,b);
  $$('.card').forEach(c=>{const s=b.dataset.f==='all'||c.classList.contains(b.dataset.f);c.classList.toggle('hide',!s);if(s){c.style.animation='none';c.offsetWidth;c.style.animation=''}})});
 addEventListener('load',()=>pill(seg,$('[aria-pressed=true]',seg)));
+// Aperçus accessibles : les vidéos ne sont chargées qu'à l'ouverture ou au survol desktop.
+const mediaDialog=$('#media-dialog'),dialogPoster=$('.dialog-poster',mediaDialog),dialogVideo=$('.dialog-video',mediaDialog);
+const closeMedia=()=>{mediaDialog.close();dialogVideo.pause();dialogVideo.removeAttribute('src');dialogVideo.load();dialogVideo.hidden=true;dialogPoster.hidden=false};
+$$('.card').forEach(card=>{
+ const preview=$('.preview',card),source=card.dataset.video;
+ card.addEventListener('click',()=>{
+  const poster=$('.poster',card),tag=$('.tag',card),title=$('strong',card),detail=$('small',card);
+  dialogPoster.src=poster.currentSrc||poster.src;dialogPoster.alt=poster.alt;dialogPoster.hidden=false;
+  $('.tag',mediaDialog).textContent=tag.textContent;$('.dialog-caption h2',mediaDialog).textContent=title.textContent;$('.dialog-caption p',mediaDialog).textContent=detail.textContent;
+  if(card.dataset.kind==='video'&&source){dialogVideo.src=source;dialogVideo.poster=dialogPoster.src;dialogVideo.hidden=false;dialogPoster.hidden=true;dialogVideo.load()}
+  mediaDialog.showModal();if(!dialogVideo.hidden)dialogVideo.play().catch(()=>{});
+ });
+ if(source&&matchMedia('(hover: hover) and (pointer: fine)').matches){
+  card.addEventListener('pointerenter',()=>{preview.src=source;preview.load();preview.play().catch(()=>{})});
+  card.addEventListener('pointerleave',()=>{preview.pause();preview.removeAttribute('src');preview.load()});
+ }
+});
+$('.dialog-close',mediaDialog).addEventListener('click',closeMedia);
+mediaDialog.addEventListener('click',e=>{if(e.target===mediaDialog)closeMedia()});
+mediaDialog.addEventListener('close',()=>{dialogVideo.pause();dialogVideo.removeAttribute('src');dialogVideo.load();dialogVideo.hidden=true;dialogPoster.hidden=false});
 // Défilement : barre, menu actif, retour en haut
 const nav=$('#nav'),nl=$$('a',nav),secs=nl.map(a=>$(a.getAttribute('href')));
 const onScroll=()=>{const h=document.documentElement,y=scrollY;
