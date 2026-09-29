@@ -61,10 +61,6 @@ document.addEventListener('pointermove',e=>{if(e.pointerType==='touch')return;
  $('.hero').style.setProperty('--px',(e.clientX/innerWidth-.5).toFixed(2));$('.hero').style.setProperty('--py',(e.clientY/innerHeight-.5).toFixed(2));
 });
 document.addEventListener('pointerdown',e=>{const b=e.target.closest('.btn');if(!b)return;const r=b.getBoundingClientRect(),s=document.createElement('span');s.className='rip';s.style.left=e.clientX-r.left+'px';s.style.top=e.clientY-r.top+'px';b.append(s);setTimeout(()=>s.remove(),650)});
-// Curseur lentille
-const lens=$('#lens');let lx=0,ly=0,tx=0,ty=0;
-document.addEventListener('pointermove',e=>{if(e.pointerType==='touch')return;tx=e.clientX;ty=e.clientY;lens.style.opacity=1;lens.classList.toggle('big',!!e.target.closest('a,button,.chip,.card,input,textarea'))});
-(function loop(){lx+=(tx-lx)*.18;ly+=(ty-ly)*.18;lens.style.transform=`translate(${lx}px,${ly}px)`;requestAnimationFrame(loop)})();
 // Budget + envoi animé
 const b=$('#b');b.oninput=()=>$('#bo').textContent=(+b.value).toLocaleString('fr-FR')+' FCFA';
 $('#form').addEventListener('submit',e=>{e.preventDefault();const s=$('#send'),t=$('.t',s);s.classList.add('load');t.textContent='Envoi en cours';
