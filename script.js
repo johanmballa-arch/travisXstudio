@@ -4,11 +4,6 @@ $('#y').textContent=new Date().getFullYear();
 let wi0=0;$$('#h1 .t').forEach(t=>{t.innerHTML=t.textContent.split(' ').map(w=>`<span class="w"><span style="--i:${wi0++}">${w}</span></span>`).join(' ')});
 // Marquee infini
 $('#track').innerHTML+=$('#track').innerHTML;
-// Réseaux sociaux
-const links={in:'LinkedIn',ig:'Instagram',fb:'Facebook'};
-const socHTML=Object.entries(links).map(([k,v])=>`<a class="ib" href="#" aria-label="${v}">${k}</a>`).join('');
-$$('.member').forEach(m=>{const d=document.createElement('div');d.className='soc';d.innerHTML=socHTML;m.append(d)});
-$('#soc').innerHTML=socHTML;
 // Pastille glissante
 const pill=(box,el)=>{const p=$('.pillbg',box);if(!el){p.style.opacity=0;return}Object.assign(p.style,{opacity:1,left:el.offsetLeft+'px',top:el.offsetTop+'px',width:el.offsetWidth+'px',height:el.offsetHeight+'px'})};
 // Filtres
