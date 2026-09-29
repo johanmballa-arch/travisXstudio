@@ -144,14 +144,12 @@
 </section>
 
 <section id="partenaires">
-  <div class="rv">
-    <div class="wrap">
-      <h2>Nos partenaires</h2>
-      <p class="lead">Des marques, des médias et des institutions qui nous font confiance.</p>
+  <div class="wrap rv">
+    <div class="collab-panel glass">
+      <div><span class="section-label">Collaborations</span><h2>Construisons de beaux projets ensemble</h2><p class="lead">Vous représentez une marque, un média ou une institution ? Parlons de ce que nous pouvons créer ensemble.</p></div>
+      <div class="collab-categories" aria-label="Types de partenaires recherchés"><span>Marques</span><span>Médias</span><span>Institutions</span></div>
+      <a class="btn" href="#contact">Proposer un partenariat <i class="ar" aria-hidden="true">↗</i></a>
     </div>
-    <div class="prow"><div class="ptrack"><div class="prt"><b>A</b>Partenaire A</div><div class="prt"><b>B</b>Partenaire B</div><div class="prt"><b>C</b>Partenaire C</div><div class="prt"><b>D</b>Partenaire D</div><div class="prt"><b>E</b>Partenaire E</div><div class="prt"><b>F</b>Partenaire F</div></div></div>
-    <div class="prow"><div class="ptrack rev"><div class="prt"><b>G</b>Partenaire G</div><div class="prt"><b>H</b>Partenaire H</div><div class="prt"><b>I</b>Partenaire I</div><div class="prt"><b>J</b>Partenaire J</div><div class="prt"><b>K</b>Partenaire K</div><div class="prt"><b>L</b>Partenaire L</div></div></div>
-    <div class="wrap pcta"><a class="btn ghost" href="#contact" data-mag>Devenir partenaire <i class="ar">↗</i></a></div>
   </div>
 </section>
 
@@ -161,8 +159,9 @@
       <h2>Parlons de votre projet</h2>
       <p class="lead">Décrivez votre besoin. Nous vous répondons rapidement.</p>
       <form id="form">
-        <div class="field"><input id="n" type="text" name="nom" placeholder=" " required autocomplete="name"><label for="n">Votre nom</label></div>
-        <div class="field"><input id="e" type="email" name="email" placeholder=" " required autocomplete="email"><label for="e">Votre email</label></div>
+        <p class="form-required"><span aria-hidden="true">*</span> Champs obligatoires</p>
+        <div class="field"><input id="n" type="text" name="nom" placeholder=" " required aria-required="true" autocomplete="name"><label for="n">Votre nom *</label></div>
+        <div class="field"><input id="e" type="email" name="email" placeholder=" " required aria-required="true" autocomplete="email"><label for="e">Votre email *</label></div>
         <fieldset><legend>Type de projet</legend>
           <div class="chips">
             <label class="chip"><input type="radio" name="type" checked><span>Clip vidéo</span></label>
@@ -173,9 +172,11 @@
           </div>
         </fieldset>
         <div class="range"><label for="b">Budget estimé : <output id="bo">500 000 FCFA</output></label>
-          <input id="b" type="range" min="100000" max="5000000" step="50000" value="500000"></div>
-        <div class="field"><textarea id="m" name="message" placeholder=" " required></textarea><label for="m">Votre message</label></div>
-        <button class="btn" id="send" type="submit" data-mag><span class="t">Envoyer le message</span><i class="ar">↗</i><b class="sp"></b></button>
+          <input id="b" type="range" min="100000" max="5000000" step="50000" value="500000" aria-valuetext="500 000 FCFA">
+          <div class="range-scale"><span>100 000 FCFA</span><span>5 000 000 FCFA</span></div></div>
+        <div class="field"><textarea id="m" name="message" placeholder=" " required aria-required="true"></textarea><label for="m">Votre message *</label></div>
+        <button class="btn" id="send" type="submit" data-mag>Envoyer le message <i class="ar" aria-hidden="true">↗</i></button>
+        <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
       </form>
     </div>
   </div>

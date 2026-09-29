@@ -56,11 +56,12 @@ document.addEventListener('pointermove',e=>{if(e.pointerType==='touch')return;
  $('.hero').style.setProperty('--px',(e.clientX/innerWidth-.5).toFixed(2));$('.hero').style.setProperty('--py',(e.clientY/innerHeight-.5).toFixed(2));
 });
 document.addEventListener('pointerdown',e=>{const b=e.target.closest('.btn');if(!b)return;const r=b.getBoundingClientRect(),s=document.createElement('span');s.className='rip';s.style.left=e.clientX-r.left+'px';s.style.top=e.clientY-r.top+'px';b.append(s);setTimeout(()=>s.remove(),650)});
-// Budget + envoi animé
-const b=$('#b');b.oninput=()=>$('#bo').textContent=(+b.value).toLocaleString('fr-FR')+' FCFA';
-$('#form').addEventListener('submit',e=>{e.preventDefault();const s=$('#send'),t=$('.t',s);s.classList.add('load');t.textContent='Envoi en cours';
- setTimeout(()=>{s.classList.replace('load','done');t.textContent='Message envoyé ✓';e.target.reset();b.oninput();
- setTimeout(()=>{s.classList.remove('done');t.textContent='Envoyer le message'},3000)},1500)});
+// Budget et état honnête du formulaire tant qu'aucun service d'envoi n'est configuré.
+const b=$('#b'),budgetOutput=$('#bo');
+const updateBudget=()=>{const value=(+b.value).toLocaleString('fr-FR')+' FCFA';budgetOutput.textContent=value;b.setAttribute('aria-valuetext',value)};
+b.addEventListener('input',updateBudget);updateBudget();
+$('#form').addEventListener('submit',e=>{e.preventDefault();$('#form-status').textContent='Le formulaire en ligne n’est pas encore connecté. Votre message n’a pas été envoyé.'});
+$('#form').addEventListener('input',()=>{$('#form-status').textContent=''});
 
 // Chronomètre REC
 let sec=0;setInterval(()=>{sec++;const p=n=>String(n).padStart(2,'0');$('#tc').textContent=`REC ${p(Math.floor(sec/3600))}:${p(Math.floor(sec/60)%60)}:${p(sec%60)}`},1000);
@@ -103,5 +104,3 @@ if(mob.matches){
 }
 })();
 
-// Partenaires : deux bandes qui défilent en sens inverse
-$$('.ptrack').forEach(t=>{const h=t.innerHTML;t.innerHTML=h+h;const n=t.children.length/2;[...t.children].slice(n).forEach(c=>c.setAttribute('aria-hidden','true'))});
