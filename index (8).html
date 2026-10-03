@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>TRAVIS X STUDIO — We turn your dreams into visual realities</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config={theme:{extend:{colors:{space:'#030712',cyan:{DEFAULT:'#06b6d4',glow:'#22d3ee'},fuchsia:{DEFAULT:'#ec4899',glow:'#f472b6'},cosmic:{DEFAULT:'#a855f7',deep:'#7c3aed'}},fontFamily:{sans:['"Plus Jakarta Sans"','Inter','system-ui','sans-serif']}}}}
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{background:#030712;color:#e2e8f0;font-family:'Plus Jakarta Sans',Inter,system-ui,sans-serif;overflow-x:hidden;margin:0;line-height:1.5}
+
+/* Cosmic background */
+.nebula{position:fixed;inset:0;z-index:0;pointer-events:none;background:
+  radial-gradient(ellipse 90% 60% at 50% 110%,rgba(88,28,135,.28),transparent 55%),
+  radial-gradient(ellipse 55% 40% at 8% 18%,rgba(6,182,212,.14),transparent 48%),
+  radial-gradient(ellipse 50% 45% at 92% 12%,rgba(236,72,153,.11),transparent 42%),
+  radial-gradient(ellipse 45% 35% at 75% 55%,rgba(168,85,247,.16),transparent 48%),
+  radial-gradient(ellipse 70% 40% at 25% 75%,rgba(59,130,246,.07),transparent 50%),
+  #030712}
+.dot-grid{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.22;background-image:radial-gradient(circle,#64748b 0.6px,transparent 0.6px);background-size:26px 26px;mask-image:radial-gradient(ellipse 75% 65% at 50% 35%,black,transparent)}
+
+/* Glass system */
+.glass{
+  background:rgba(15,23,42,.45);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border:1px solid rgba(255,255,255,.08);
+  box-shadow:0 8px 32px rgba(0,0,0,.25),inset 0 1px 0 rgba(255,255,255,.04);
+}
+.glass-strong{
+  background:rgba(15,23,42,.55);
+  backdrop-filter:blur(32px);-webkit-backdrop-filter:blur(32px);
+  border:1px solid rgba(6,182,212,.18);
+  box-shadow:0 12px 40px rgba(0,0,0,.35),0 0 40px rgba(6,182,212,.06),inset 0 1px 0 rgba(255,255,255,.06);
+}
+.nav-float{background:rgba(3,7,18,.65);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,.08);box-shadow:0 8px 32px rgba(0,0,0,.3)}
+.gradient-text{background:linear-gradient(135deg,#22d3ee 0%,#a855f7 50%,#ec4899 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.btn-primary{background:linear-gradient(135deg,#06b6d4,#7c3aed 60%,#ec4899);transition:transform .3s ease,box-shadow .3s ease,filter .3s ease}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 0 24px rgba(6,182,212,.28);filter:brightness(1.08)}
+.btn-ghost{border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.03);backdrop-filter:blur(12px);transition:all .25s ease}
+.btn-ghost:hover{border-color:rgba(6,182,212,.4);background:rgba(6,182,212,.08);box-shadow:0 0 18px rgba(6,182,212,.12)}
+.stagger{opacity:0;transform:translateY(20px);filter:blur(5px);transition:opacity .65s ease,transform .65s ease,filter .65s ease}
+.stagger.show{opacity:1;transform:none;filter:none}
+.stagger-d1{transition-delay:.08s}.stagger-d2{transition-delay:.18s}.stagger-d3{transition-delay:.28s}.stagger-d4{transition-delay:.38s}.stagger-d5{transition-delay:.48s}
+.section-label{font-size:11px;font-weight:600;letter-spacing:.28em;text-transform:uppercase}
+@media(prefers-reduced-motion:reduce){.stagger{opacity:1;transform:none;filter:none;transition:none}}
+::selection{background:rgba(6,182,212,.35);color:#fff}
+</style>
+</head>
+<body>
+<div class="nebula" aria-hidden="true"></div>
+<div class="dot-grid" aria-hidden="true"></div>
+<canvas id="stardust" aria-hidden="true"></canvas>
+<a href="https://wa.me/237682681054" target="_blank" rel="noopener" aria-label="WhatsApp" class="fixed bottom-5 right-4 sm:bottom-6 sm:right-6 z-50 w-14 h-14 rounded-full bg-[#25D366] text-white flex items-center justify-center text-2xl shadow-[0_4px_24px_rgba(37,211,102,.3)] hover:scale-105 transition-transform"><i class="fab fa-whatsapp"></i></a>
+<header class="fixed top-0 left-0 right-0 z-40 px-3 sm:px-5 pt-3 sm:pt-4">
+  <nav class="nav-float max-w-6xl mx-auto rounded-2xl px-3 sm:px-5 py-2.5 sm:py-3 flex items-center justify-between gap-2">
+    <a href="#home" class="flex items-center gap-2.5 shrink-0"><span class="w-9 h-9 rounded-xl bg-gradient-to-br from-cyan via-cosmic to-fuchsia flex items-center justify-center font-extrabold text-sm">TX</span><span class="hidden sm:block leading-tight"><span class="block text-[11px] font-bold tracking-[0.18em] uppercase">Travis X</span><span class="block text-[9px] text-slate-500 tracking-widest uppercase">Studio</span></span></a>
+    <div class="hidden lg:flex items-center gap-5 text-[11px] font-medium tracking-[0.12em] uppercase text-slate-400"><a href="#home" class="hover:text-cyan">Accueil</a><a href="#services" class="hover:text-cyan">Services</a><a href="#about" class="hover:text-cyan">À propos</a><a href="#work" class="hover:text-cyan">Portfolio</a><a href="#team" class="hover:text-cyan">Équipe</a><a href="#contact" class="hover:text-cyan">Contact</a></div>
+    <div class="flex items-center gap-2"><a href="#contact" class="btn-primary text-white text-[10px] sm:text-[11px] font-semibold tracking-wide uppercase px-4 py-2.5 rounded-full whitespace-nowrap">Démarrer un projet</a><button id="menu-btn" class="lg:hidden w-10 h-10 rounded-xl glass flex items-center justify-center text-slate-300" aria-label="Menu"><i class="fas fa-bars"></i></button></div>
+  </nav>
+  <div id="mobile-menu" class="hidden lg:hidden mt-2 mx-3 rounded-2xl border border-white/10 p-3 space-y-1 bg-slate-950/95 backdrop-blur-xl"><a href="#home" class="block py-3 px-3 rounded-xl text-xs uppercase">Accueil</a><a href="#services" class="block py-3 px-3 rounded-xl text-xs uppercase">Services</a><a href="#about" class="block py-3 px-3 rounded-xl text-xs uppercase">À propos</a><a href="#work" class="block py-3 px-3 rounded-xl text-xs uppercase">Portfolio</a><a href="#team" class="block py-3 px-3 rounded-xl text-xs uppercase">Équipe</a><a href="#contact" class="block py-3 px-3 rounded-xl text-xs uppercase">Contact</a></div>
+</header>
+<main class="relative z-10">
+<section id="home" class="min-h-screen flex items-center pt-28 sm:pt-32 pb-16 px-4 sm:px-6"><div class="max-w-6xl mx-auto w-full grid lg:grid-cols-2 gap-10 lg:gap-14 items-center"><div><div class="stagger inline-flex items-center gap-2 glass rounded-full px-3.5 py-1.5 mb-5"><span>🎬</span><span class="text-[10px] tracking-wide text-slate-300">Agence de communication & production audiovisuelle</span></div><h1 class="stagger stagger-d1 text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight mb-5"><span class="gradient-text">We turn your dreams</span><br/><span class="text-white">into visual realities</span></h1><p class="stagger stagger-d2 text-slate-400 text-sm sm:text-base leading-relaxed max-w-lg mb-8">Nous façonnons des narrations vidéo immersives et des expériences digitales haut de gamme pour propulser votre image.</p><div class="stagger stagger-d3 flex flex-wrap gap-3"><a href="#services" class="btn-primary text-white text-[11px] font-semibold tracking-widest uppercase px-5 py-3.5 rounded-full">Découvrir nos services</a><a href="#contact" class="btn-ghost text-[11px] font-semibold tracking-widest uppercase px-5 py-3.5 rounded-full text-slate-200">Parlons du projet</a></div></div><div class="stagger stagger-d4 relative"><div class="absolute -inset-6 bg-gradient-to-br from-cyan/10 via-cosmic/10 to-fuchsia/10 blur-3xl rounded-full pointer-events-none"></div><div class="glass-strong relative rounded-[1.75rem] p-3 border border-cyan/20"><div class="aspect-video rounded-2xl bg-gradient-to-br from-slate-900 via-[#0a0e17] to-space border border-white/10 flex flex-col items-center justify-center text-center"><p class="text-[10px] tracking-[0.3em] uppercase text-cyan/80 mb-2">TRAVIS X STUDIO</p><p class="text-2xl sm:text-3xl font-bold text-white">Image · Stratégie · Digital</p><p class="text-xs text-slate-400 mt-3">Du concept à la diffusion</p></div></div></div></div></section>
+<section id="services" class="py-16 sm:py-24 px-4 sm:px-6"><div class="max-w-6xl mx-auto"><div class="text-center mb-10 sm:mb-14"><p class="text-cyan text-[11px] font-semibold tracking-[0.3em] uppercase mb-3">Expertise</p><h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-3">Nos Services</h2><p class="text-slate-400 text-sm max-w-xl mx-auto">Trois pôles pour donner corps à votre image, du contenu à votre présence web.</p></div><div class="grid lg:grid-cols-3 gap-4 sm:gap-5">
+<article class="bento-item glass rounded-3xl p-6 sm:p-7 border border-white/10"><div class="text-2xl mb-4">🎬</div><p class="text-[10px] tracking-[0.2em] uppercase text-cyan font-semibold">Pôle 01</p><h3 class="font-bold text-lg text-white mt-1 mb-3">Création de contenu</h3><p class="text-sm text-slate-400 leading-relaxed">Créations graphiques et audiovisuelles pour donner corps à votre imagination.</p><ul class="mt-5 space-y-2 text-xs text-slate-400"><li>Visuels, affiches et identité visuelle</li><li>Clips, spots, reels et montage</li><li>Photo, retouche et rédaction</li></ul></article>
+<article class="bento-item glass rounded-3xl p-6 sm:p-7 border border-white/10"><div class="text-2xl mb-4">📱</div><p class="text-[10px] tracking-[0.2em] uppercase text-fuchsia font-semibold">Pôle 02</p><h3 class="font-bold text-lg text-white mt-1 mb-3">Communication digitale</h3><p class="text-sm text-slate-400 leading-relaxed">Stratégie, présence en ligne et animation d’une communauté fidèle.</p><ul class="mt-5 space-y-2 text-xs text-slate-400"><li>Stratégie et ligne éditoriale</li><li>Gestion des réseaux sociaux</li><li>Publicité et suivi des résultats</li></ul></article>
+<article class="bento-item glass rounded-3xl p-6 sm:p-7 border border-white/10"><div class="text-2xl mb-4">💻</div><p class="text-[10px] tracking-[0.2em] uppercase text-cosmic font-semibold">Pôle 03</p><h3 class="font-bold text-lg text-white mt-1 mb-3">Sites web</h3><p class="text-sm text-slate-400 leading-relaxed">Des plateformes modernes, rapides et adaptées à vos objectifs.</p><ul class="mt-5 space-y-2 text-xs text-slate-400"><li>Sites vitrines et e-commerce</li><li>Design responsive et bases SEO</li><li>Hébergement et maintenance</li></ul></article>
+</div><div class="text-center mt-10"><a href="#contact" class="btn-primary inline-flex text-white text-[11px] font-semibold tracking-widest uppercase px-6 py-3.5 rounded-full">Démarrer un projet</a></div></div></section>
+
+<!-- ABOUT -->
+</section>
+</main>
+</body>
+</html>
