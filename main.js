@@ -46,6 +46,50 @@ const observerReveal = new IntersectionObserver((entries) => {
 }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
 reveals.forEach(el => observerReveal.observe(el));
 
+// About counters start when the proof badges enter the viewport.
+const aboutStats = document.querySelector('.about-stats');
+if (aboutStats && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  const statsObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      entry.target.querySelectorAll('.about-count').forEach(counter => {
+        const target = Number(counter.dataset.count) || 0;
+        const started = performance.now();
+        const duration = 1100;
+        const tick = now => {
+          const progress = Math.min((now - started) / duration, 1);
+          counter.textContent = Math.round(target * (1 - Math.pow(1 - progress, 3)));
+          if (progress < 1) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+      });
+      statsObserver.unobserve(entry.target);
+    });
+  }, { threshold: 0.35 });
+  statsObserver.observe(aboutStats);
+} else if (aboutStats) {
+  aboutStats.querySelectorAll('.about-count').forEach(counter => {
+    counter.textContent = counter.dataset.count || '0';
+  });
+}
+
+// Small differential scroll speeds add depth without affecting touch layouts.
+const aboutSection = document.getElementById('apropos');
+if (aboutSection && window.matchMedia('(min-width: 900px) and (prefers-reduced-motion: no-preference)').matches) {
+  let aboutFrame = 0;
+  const updateAboutParallax = () => {
+    aboutFrame = 0;
+    const bounds = aboutSection.getBoundingClientRect();
+    const offset = Math.max(-10, Math.min(10, (innerHeight * 0.5 - (bounds.top + bounds.height * 0.5)) * 0.018));
+    aboutSection.style.setProperty('--about-story-shift', `${-offset}px`);
+    aboutSection.style.setProperty('--about-proof-shift', `${offset}px`);
+  };
+  addEventListener('scroll', () => {
+    if (!aboutFrame) aboutFrame = requestAnimationFrame(updateAboutParallax);
+  }, { passive: true });
+  updateAboutParallax();
+}
+
 // Portfolio filter
 const filterBtns = document.querySelectorAll('.filter-btn');
 const portfolioItems = document.querySelectorAll('.portfolio-item');
