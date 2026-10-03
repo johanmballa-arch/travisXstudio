@@ -10,8 +10,6 @@ tailwind.config={theme:{extend:{colors:{space:'#030712',cyan:{DEFAULT:'#06b6d4',
 </script>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
 
 <style>
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -58,7 +56,6 @@ body{background:#030712;color:#e2e8f0;font-family:'Plus Jakarta Sans',Inter,syst
 <body>
 <div class="nebula" aria-hidden="true"></div>
 <div class="dot-grid" aria-hidden="true"></div>
-<canvas id="stardust" aria-hidden="true"></canvas>
 <a href="https://wa.me/237682681054" target="_blank" rel="noopener" aria-label="WhatsApp" class="fixed bottom-5 right-4 sm:bottom-6 sm:right-6 z-50 w-14 h-14 rounded-full bg-[#25D366] text-white flex items-center justify-center text-2xl shadow-[0_4px_24px_rgba(37,211,102,.3)] hover:scale-105 transition-transform"><i class="fab fa-whatsapp"></i></a>
 <header class="fixed top-0 left-0 right-0 z-40 px-3 sm:px-5 pt-3 sm:pt-4">
   <nav class="nav-float max-w-6xl mx-auto rounded-2xl px-3 sm:px-5 py-2.5 sm:py-3 flex items-center justify-between gap-2">
@@ -77,7 +74,67 @@ body{background:#030712;color:#e2e8f0;font-family:'Plus Jakarta Sans',Inter,syst
 </div><div class="text-center mt-10"><a href="#contact" class="btn-primary inline-flex text-white text-[11px] font-semibold tracking-widest uppercase px-6 py-3.5 rounded-full">Démarrer un projet</a></div></div></section>
 
 <!-- ABOUT -->
+<section id="about" class="py-16 sm:py-24 px-4 sm:px-6">
+  <div class="max-w-6xl mx-auto grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+    <div class="glass-strong rounded-3xl p-6 sm:p-9 border border-white/10">
+      <p class="text-cosmic text-[11px] font-semibold tracking-[0.3em] uppercase mb-3">À propos</p>
+      <h2 class="text-2xl sm:text-3xl font-bold text-white leading-tight mb-5">L’art de transformer le virtuel en réel.</h2>
+      <p class="text-sm text-slate-400 leading-relaxed">TRAVIS X STUDIO accompagne les marques, les artistes et les organisations dans la création de contenus visuels et d’expériences digitales. De la stratégie à la production, chaque projet est conçu pour raconter une histoire et renforcer votre image.</p>
+      <a href="#contact" class="btn-primary inline-flex text-white text-[11px] font-semibold tracking-widest uppercase px-6 py-3.5 rounded-full mt-7">Échanger avec le studio</a>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+      <div class="glass rounded-2xl p-5 border border-white/10"><span class="text-xl">✦</span><h3 class="text-sm font-bold text-white mt-3 mb-1">Création</h3><p class="text-xs text-slate-400 leading-relaxed">Des idées singulières, pensées pour votre public.</p></div>
+      <div class="glass rounded-2xl p-5 border border-white/10"><span class="text-xl">◈</span><h3 class="text-sm font-bold text-white mt-3 mb-1">Production</h3><p class="text-xs text-slate-400 leading-relaxed">Une réalisation soignée, du tournage au rendu final.</p></div>
+      <div class="glass rounded-2xl p-5 border border-white/10 sm:col-span-2"><span class="text-xl">↗</span><h3 class="text-sm font-bold text-white mt-3 mb-1">Diffusion</h3><p class="text-xs text-slate-400 leading-relaxed">Des formats adaptés à vos canaux et à vos objectifs.</p></div>
+    </div>
+  </div>
 </section>
+
+<!-- Sections prêtes à recevoir les contenus fournis par le propriétaire -->
+<section id="team" aria-label="Équipe"></section>
+<section id="work" aria-label="Portfolio"></section>
+
+<!-- CONTACT -->
+<section id="contact" class="py-16 sm:py-24 px-4 sm:px-6">
+  <div class="max-w-5xl mx-auto">
+    <div class="text-center mb-10">
+      <p class="text-cyan text-[11px] font-semibold tracking-[0.3em] uppercase mb-3">Contact</p>
+      <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-3">Parlons de votre projet.</h2>
+      <p class="text-slate-400 text-sm max-w-xl mx-auto">Une idée, une question ou une demande de devis ? Contactez directement le studio.</p>
+    </div>
+    <div class="grid sm:grid-cols-2 gap-4 max-w-3xl mx-auto">
+      <a href="https://wa.me/237682681054" target="_blank" rel="noopener" class="glass rounded-2xl p-5 sm:p-6 border border-white/10 flex items-center gap-4 hover:border-emerald-400/40 transition">
+        <span class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-xl"><i class="fab fa-whatsapp"></i></span>
+        <span><span class="block text-[10px] uppercase tracking-widest text-slate-500 mb-1">WhatsApp</span><span class="text-sm font-semibold text-white">+237 682 681 054</span></span>
+      </a>
+      <a href="mailto:johanmballa@icloud.com" class="glass rounded-2xl p-5 sm:p-6 border border-white/10 flex items-center gap-4 hover:border-cyan/40 transition">
+        <span class="w-12 h-12 rounded-xl bg-cyan/10 text-cyan flex items-center justify-center text-lg"><i class="fas fa-envelope"></i></span>
+        <span><span class="block text-[10px] uppercase tracking-widest text-slate-500 mb-1">Email</span><span class="text-sm font-semibold text-white break-all">johanmballa@icloud.com</span></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer class="relative z-10 mt-8 border-t border-white/10 bg-slate-950/50">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 pt-8 sm:pt-12 pb-6">
+    <div class="glass-strong rounded-2xl sm:rounded-3xl p-5 sm:p-8 mb-8 sm:mb-10 border border-cyan/15 flex flex-col md:flex-row md:items-center justify-between gap-5">
+      <div><p class="text-[10px] tracking-[0.28em] uppercase text-cyan font-semibold mb-2">Un projet en tête ?</p><h2 class="text-xl sm:text-2xl font-bold text-white">Donnons-lui une forme mémorable.</h2><p class="text-xs sm:text-sm text-slate-400 mt-2">Création de contenu, communication digitale et expériences web.</p></div>
+      <a href="#contact" class="btn-primary inline-flex items-center justify-center gap-2 text-white text-[10px] sm:text-[11px] font-semibold tracking-widest uppercase px-5 py-3 rounded-full shrink-0">Parlons de votre projet <i class="fas fa-arrow-up-right-from-square"></i></a>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10 pb-8 sm:pb-10">
+      <div>
+        <a href="#home" class="inline-flex items-center gap-3 mb-4"><span class="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan via-cosmic to-fuchsia flex items-center justify-center font-extrabold text-xs">TX</span><span><span class="block text-xs tracking-[0.18em] uppercase text-white font-bold">Travis X Studio</span><span class="block text-[9px] tracking-[0.2em] uppercase text-slate-500 mt-0.5">Image · Stratégie · Digital</span></span></a>
+        <p class="text-xs text-slate-400 leading-relaxed max-w-xs">We turn your dreams into visual realities°. Une vision créative, du concept à la diffusion.</p>
+        <div class="flex gap-2 mt-5"><a href="https://www.instagram.com/travis_x_studios" target="_blank" rel="noopener" class="w-9 h-9 rounded-xl border border-white/10 flex items-center justify-center text-slate-400 hover:text-fuchsia hover:border-fuchsia/40 transition" aria-label="Instagram"><i class="fab fa-instagram"></i></a><a href="https://www.tiktok.com/@travisxstudios" target="_blank" rel="noopener" class="w-9 h-9 rounded-xl border border-white/10 flex items-center justify-center text-slate-400 hover:text-cyan hover:border-cyan/40 transition" aria-label="TikTok"><i class="fab fa-tiktok"></i></a><a href="https://wa.me/237682681054" target="_blank" rel="noopener" class="w-9 h-9 rounded-xl border border-white/10 flex items-center justify-center text-slate-400 hover:text-emerald-400 hover:border-emerald-500/40 transition" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a></div>
+      </div>
+      <div><h3 class="text-[10px] tracking-[0.24em] uppercase text-slate-200 font-semibold mb-4">Explorer</h3><ul class="space-y-3 text-xs text-slate-400"><li><a href="#home" class="hover:text-cyan transition">Accueil</a></li><li><a href="#services" class="hover:text-cyan transition">Services</a></li><li><a href="#about" class="hover:text-cyan transition">À propos</a></li><li><a href="#contact" class="hover:text-cyan transition">Contact</a></li></ul></div>
+      <div><h3 class="text-[10px] tracking-[0.24em] uppercase text-slate-200 font-semibold mb-4">Expertises</h3><ul class="space-y-3 text-xs text-slate-400"><li><a href="#services" class="hover:text-cyan transition">Création de contenu</a></li><li><a href="#services" class="hover:text-cyan transition">Communication digitale</a></li><li><a href="#services" class="hover:text-cyan transition">Sites web</a></li><li><a href="#services" class="hover:text-cyan transition">Clips & production vidéo</a></li><li><a href="#services" class="hover:text-cyan transition">Affiches & identité visuelle</a></li></ul></div>
+      <div><h3 class="text-[10px] tracking-[0.24em] uppercase text-slate-200 font-semibold mb-4">Contact direct</h3><a href="https://wa.me/237682681054" target="_blank" rel="noopener" class="flex items-center gap-3 text-xs text-slate-300 hover:text-white transition mb-3"><span class="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center"><i class="fab fa-whatsapp"></i></span><span><span class="block text-[9px] uppercase tracking-widest text-slate-500 mb-0.5">WhatsApp</span>+237 682 681 054</span></a><a href="mailto:johanmballa@icloud.com" class="flex items-center gap-3 text-xs text-slate-300 hover:text-white transition"><span class="w-8 h-8 rounded-lg bg-cyan/10 text-cyan flex items-center justify-center"><i class="fas fa-envelope"></i></span><span><span class="block text-[9px] uppercase tracking-widest text-slate-500 mb-0.5">Email</span>Écrire au studio</span></a></div>
+    </div>
+    <div class="border-t border-white/10 pt-5 flex flex-col sm:flex-row items-center justify-between gap-3 text-[10px] text-slate-500"><p>© <span id="footer-year"></span> Travis X Studio. Tous droits réservés.</p><p class="text-slate-600">We turn your dreams into visual realities°</p><a href="#home" class="inline-flex items-center gap-2 hover:text-cyan transition">Retour en haut <i class="fas fa-arrow-up"></i></a></div>
+  </div>
+</footer>
 </main>
+<script>document.getElementById('footer-year').textContent=new Date().getFullYear();</script>
 </body>
 </html>
