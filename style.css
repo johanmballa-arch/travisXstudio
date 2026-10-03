@@ -1070,6 +1070,16 @@ body::before{background:none}
 .footer-contact a i{color:var(--sky);font-size:.95rem}
 .footer-contact a:hover{color:#fff}
 @media(max-width:560px){.footer-contact{flex-direction:column;align-items:center;gap:12px}.footer-contact a{font-size:.78rem}}
+.contact-direct{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:0 0 24px}
+.contact-direct-item{display:flex;align-items:center;gap:12px;min-width:0;padding:13px 14px;border:1px solid rgba(255,255,255,.09);border-radius:16px;background:rgba(255,255,255,.035);color:#fff;text-decoration:none;transition:transform .25s ease,border-color .25s ease,background .25s ease,box-shadow .25s ease}
+.contact-direct-item:hover{transform:translateY(-2px);border-color:rgba(91,192,235,.35);background:rgba(91,192,235,.055);box-shadow:0 8px 24px rgba(0,0,0,.2)}
+.contact-direct-item>i:first-child{flex:none;width:36px;height:36px;display:grid;place-items:center;border-radius:11px;background:rgba(91,192,235,.09);color:var(--sky);font-size:1rem}
+.contact-direct-item.contact-whatsapp>i:first-child{background:rgba(37,211,102,.1);color:#45d483}
+.contact-direct-item span{display:grid;gap:2px;min-width:0}
+.contact-direct-item small{font-size:.65rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+.contact-direct-item strong{overflow-wrap:anywhere;font-size:.83rem;font-weight:600}
+.contact-direct-item .contact-out{margin-left:auto;flex:none;color:rgba(168,197,217,.55);font-size:.7rem}
+@media(max-width:560px){.contact-direct{grid-template-columns:minmax(0,1fr);gap:8px}.contact-direct-item{padding:11px 12px}}
 
 /* Ambiance de studio : profondeur, repères de montage et mouvement mesuré */
 body{background-color:#060b16;background-image:radial-gradient(ellipse at 50% 42%,#0b1525 0%,#080f1d 43%,#060b16 76%);background-attachment:fixed}
